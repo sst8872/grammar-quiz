@@ -1,0 +1,1 @@
+{"version":3,"sources":["css/style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"style.78032849.css","sourceRoot":"..","sourcesContent":["h3 {\r\n    text-align: center;\r\n}\r\n\r\n.scoreOutput {\r\n    font-size: 2em;\r\n    text-align: center;\r\n    padding: 10px;\r\n}\r\n"]}

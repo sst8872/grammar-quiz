@@ -1,0 +1,17 @@
+h3 {
+    text-align: center;
+}
+
+.scoreOutput {
+    font-size: 2em;
+    text-align: center;
+    padding: 10px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
