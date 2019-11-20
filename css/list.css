@@ -29,12 +29,13 @@ body {
 .box h4
 {
     color: #fff;
-    font-weight: lighter;
+    font-weight: normal;
     background: #03a8f4;
     padding: 10px 20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
 
 .box ul {
     position: relative;
