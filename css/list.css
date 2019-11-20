@@ -17,7 +17,9 @@ body {
 }
 
 .box {
-    width: 500px;
+    display: none;
+    position: relative;
+    width: 600px;
     border-bottom: 20px solid #03a9f2;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -49,7 +51,7 @@ body {
     width: 100%;
     background: #fff;
     box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-    transition: all 0.5s;
+    transition: all 0.1s;
 }
 
 .box ul li:hover {
@@ -79,4 +81,25 @@ body {
 .box ul li:hover span {
     background: #fff;
     color: #25bcff;
+}
+
+@media screen and (max-width: 674px) {
+    .box {
+        width: 500px;
+    }
+    .box h2 {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .box {
+        width: 400px;
+    }
+    .box h2 {
+        font-size: 1.1em;
+    }
+    .box li {
+        font-size: 1em;
+    }
 }

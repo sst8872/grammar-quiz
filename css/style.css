@@ -10,8 +10,18 @@ h3 {
 
 .green {
     color: green;
+    text-align: center;
 }
 
 .red {
     color: red;
+    text-align: center;
+}
+
+
+
+.index {
+    display: inline-block;
+    float: left;
+    margin-right: 2px;
 }
