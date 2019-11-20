@@ -6,6 +6,7 @@ const app = (function() {
   const feedID = "1nnCrmaEtLiaVTfWmgRdaR9GW_SJE9tR-XSAEtskMWPM";
   let myData = []; // Object for spreadsheet data
   let game = {}; // Object for game data
+  let tempHint = {};
 
   // Dom elements
   const peterBox = document.querySelector(".peter-box");
@@ -88,9 +89,14 @@ const app = (function() {
       h2.appendChild(h2Text);
       output.appendChild(h2);
       // Build a question
+      console.log(holder, 'from holder');
       let tempArray = [];
+      tempHint.correct = holder['correct'];
+      tempHint.kor  = holder['kor'];
+      tempHint.exp = holder['exp'];
+      tempHint.question = holder['question'];
       for (let key in holder) {
-        if (key != "question") {
+        if (key != "question" && key != 'kor' && key != 'exp') {
           let ans = holder[key];
           let res = false;
           if (key == "correct") {
@@ -104,12 +110,12 @@ const app = (function() {
       shuffleArray(tempArray);
       let ul = document.createElement("ul");
       tempArray.forEach((answer, i) => {
-        let li = document.createElement("li");
-        li.textContent = tempArray[i].answer;
-        li.checkMe = tempArray[i].status;
-        li.addEventListener("click", checkAnswer);
-        li.insertAdjacentHTML("afterbegin", `<span>${i + 1}</span>`);
-        ul.appendChild(li);
+          let li = document.createElement("li");
+          li.textContent = tempArray[i].answer;
+          li.checkMe = tempArray[i].status;
+          li.addEventListener("click", checkAnswer);
+          li.insertAdjacentHTML("afterbegin", `<span>${i + 1}</span>`);
+          ul.appendChild(li);
       });
       const index = document.createElement('div');
       index.setAttribute('class', 'index');
@@ -130,6 +136,9 @@ const app = (function() {
 
   // Check if the answer is correct
   function checkAnswer(e) {
+    const modalBtn = document.querySelector('.modalBtn');
+    modalBtn.style.display = 'block';
+    modalBtn.addEventListener('click', showHint);
     let responder = "Sorry, Incorrect";
     let resClass = e.target.checkMe ? 'green' : 'red';
     if (e.target.checkMe) {
@@ -141,6 +150,7 @@ const app = (function() {
     lis.forEach(li => {
       li.removeEventListener("click", checkAnswer);
     });
+    // EventListener for hint
     // Show responder button
     let div = document.createElement("div");
     let nextText = "Next Question";
@@ -157,9 +167,24 @@ const app = (function() {
                     /> 
                 </p>`;
     div.addEventListener("click", function() {
+      document.querySelector('.modalBtn').style.display = 'none';
+      document.querySelector('.h2').textContent = '';
+      document.querySelector('.question').textContent = '';
+      document.querySelector('.kor').textContent = '';
+      document.querySelector('.exp').textContent = '';
+      document.querySelector('.modalWrapper').classList.remove('showModal');
       questionBuilder();
     });
     peterBox.appendChild(div);
+  }
+
+  function showHint(e) {
+      document.querySelector('.h2').textContent = '정답 ' + tempHint.correct;
+      document.querySelector('.question').textContent = '[문제] ' + tempHint.question;
+      document.querySelector('.kor').textContent = tempHint.kor;
+      document.querySelector('.exp').textContent = tempHint.exp;
+
+      return;
   }
 
   function loadJSON(sheetLen) {
