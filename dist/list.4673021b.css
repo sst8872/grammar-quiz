@@ -17,6 +17,7 @@ body {
 }
 
 .box {
+    margin-left: -17px;
     display: none;
     position: relative;
     width: 600px;
