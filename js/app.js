@@ -218,6 +218,7 @@ const app = (function() {
           });
       })
     ).then(result => {
+      console.log(result);
       // Make globaldata object from spreadsheets
       result.forEach((item, i) => {
         myData[result[i].key] = result[i].value;
