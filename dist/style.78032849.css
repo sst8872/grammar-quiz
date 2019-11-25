@@ -2,6 +2,30 @@ h3 {
     text-align: center;
 }
 
+.home {
+    position: absolute;
+    right: 10px;
+}
+
+/* Style buttons */
+.btn {
+    background-color: #03a8f4; /* Blue background */
+    border: none; /* Remove borders */
+    color: #ddd; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    border-radius: 50%;
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: #3b5998;
+    color: white;
+
+}
+
+
 .scoreOutput {
     font-size: 2em;
     text-align: center;

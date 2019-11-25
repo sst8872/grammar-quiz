@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "parcel index.html no-source-maps",
+    "build": "parcel index.html no-source-maps -d dist --public-url ./"
+  },
   "devDependencies": {
     "cssnano": "^4.1.10"
   }
