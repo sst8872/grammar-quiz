@@ -4,17 +4,23 @@ h3 {
 
 .home {
     position: absolute;
-    right: 10px;
+    right: 5px;
+    top: calc(50% - 170px);
+}
+
+@media (min-width: 560px) {
+    .home {
+        top: calc(50% - 160px);
+    }
 }
 
 /* Style buttons */
 .btn {
-    background-color: #03a8f4; /* Blue background */
     border: none; /* Remove borders */
-    color: #ddd; /* White text */
+    color: #f5f5f5; /* White text */
     padding: 12px 16px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    border-radius: 50%;
+    font-size: 1.5em; /* Set a font size */
+    /*border-radius: 50%;*/
     cursor: pointer; /* Mouse pointer on hover */
 }
 
@@ -22,7 +28,10 @@ h3 {
 .btn:hover {
     background-color: #3b5998;
     color: white;
+}
 
+.home-btn {
+    color: #b9b9b9;
 }
 
 
