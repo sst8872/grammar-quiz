@@ -59,7 +59,8 @@ const app = (function() {
   function quizBuilder(quizName) {
     game.page = 0;
     game.score = 0;
-    game.curQuiz = myData[quizName];
+    game.curQuiz = shuffleArray(myData[quizName]);
+    console.log(game.curQuiz);
     game.totalQuestions = game.curQuiz.length;
 
     // Load actual questions
@@ -89,7 +90,6 @@ const app = (function() {
       h2.appendChild(h2Text);
       output.appendChild(h2);
       // Build a question
-      console.log(holder, 'from holder');
       let tempArray = [];
       tempHint.correct = holder['correct'];
       tempHint.kor  = holder['kor'];
@@ -132,6 +132,7 @@ const app = (function() {
       array[i] = array[j];
       array[j] = temp;
     }
+    return array;
   }
 
   // Check if the answer is correct
@@ -218,7 +219,6 @@ const app = (function() {
           });
       })
     ).then(result => {
-      console.log(result);
       // Make globaldata object from spreadsheets
       result.forEach((item, i) => {
         myData[result[i].key] = result[i].value;
