@@ -1,4 +1,5 @@
-function makeModal() {
+function makeModal(ans, exp) {
+
     const btn = document.querySelector('.modalBtn');
     const modalWrapper = document.querySelector('.modalWrapper');
     const body = document.querySelector('body');
@@ -9,6 +10,10 @@ function makeModal() {
         closBtn.addEventListener('click', function (e) {
             return modalWrapper.classList.remove('showModal');
         });
+
+        // modalAns.innerHTML += `&nbsp;&nbsp;<span style="color: white">${ans}</span>`
+        // modalExp.innerHTML = exp;
+
         modalWrapper.addEventListener('click', function (e) {
             return modalWrapper.classList.remove('showModal');
         });

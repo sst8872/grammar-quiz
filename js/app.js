@@ -1,5 +1,5 @@
 import makeModal from "./modal";
-makeModal();
+
 
 const app = (function() {
   // Spreadsheet json feed
@@ -12,6 +12,9 @@ const app = (function() {
   const dropDownList = document.querySelector("#dropDownList");
   const index = document.querySelector('.index');
   const output = document.querySelector(".output");
+  // modal
+  const modalAns = document.getElementById('modalAns');
+  const modalExp = document.getElementById('modalExp');
 
   // Load jason data from spreadsheets
   function init() {
@@ -104,13 +107,29 @@ const app = (function() {
       shuffleArray(tempArray);
       let ul = document.createElement("ul");
       tempArray.forEach((answer, i) => {
-        let li = document.createElement("li");
-        li.textContent = tempArray[i].answer;
-        li.checkMe = tempArray[i].status;
-        li.addEventListener("click", checkAnswer);
-        li.insertAdjacentHTML("afterbegin", `<span>${i + 1}</span>`);
-        ul.appendChild(li);
+          let ans;
+          let exp;
+          if (!answer.answer.includes('[해석]') && !answer.answer.includes('[설명]')) {
+            let li = document.createElement("li");
+            li.textContent = tempArray[i].answer;
+            li.checkMe = tempArray[i].status;
+            li.addEventListener("click", checkAnswer);
+            li.insertAdjacentHTML("afterbegin", `<span>${i + 1}</span>`);
+            ul.appendChild(li);
+          }
+
+          if (answer.status) {
+            ans = answer.answer;
+            modalAns.innerHTML = `&nbsp;&nbsp;<span style="color: white">${ans}</span>`
+          }
+          if (answer.answer.includes('설명')) {
+             modalExp.innerHTML = answer.answer;
+          }
+
+          makeModal();
       });
+
+
       const index = document.createElement('div');
       index.setAttribute('class', 'index');
       index.innerHTML = `<span class="index">${game.page + 1} / ${game.curQuiz.length}</span>`

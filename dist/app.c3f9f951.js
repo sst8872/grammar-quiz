@@ -125,7 +125,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function makeModal() {
+function makeModal(ans, exp) {
   var btn = document.querySelector('.modalBtn');
   var modalWrapper = document.querySelector('.modalWrapper');
   var body = document.querySelector('body');
@@ -134,7 +134,9 @@ function makeModal() {
     var closBtn = document.querySelector('.close');
     closBtn.addEventListener('click', function (e) {
       return modalWrapper.classList.remove('showModal');
-    });
+    }); // modalAns.innerHTML += `&nbsp;&nbsp;<span style="color: white">${ans}</span>`
+    // modalExp.innerHTML = exp;
+
     modalWrapper.addEventListener('click', function (e) {
       return modalWrapper.classList.remove('showModal');
     });
@@ -155,15 +157,17 @@ var _modal = _interopRequireDefault(require("./modal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
-(0, _modal.default)();
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var app = function () {
   // Spreadsheet json feed
@@ -176,7 +180,10 @@ var app = function () {
   var peterBox = document.querySelector(".peter-box");
   var dropDownList = document.querySelector("#dropDownList");
   var index = document.querySelector('.index');
-  var output = document.querySelector(".output"); // Load jason data from spreadsheets
+  var output = document.querySelector(".output"); // modal
+
+  var modalAns = document.getElementById('modalAns');
+  var modalExp = document.getElementById('modalExp'); // Load jason data from spreadsheets
 
   function init() {
     getLength();
@@ -277,12 +284,28 @@ var app = function () {
       shuffleArray(tempArray);
       var ul = document.createElement("ul");
       tempArray.forEach(function (answer, i) {
-        var li = document.createElement("li");
-        li.textContent = tempArray[i].answer;
-        li.checkMe = tempArray[i].status;
-        li.addEventListener("click", checkAnswer);
-        li.insertAdjacentHTML("afterbegin", "<span>".concat(i + 1, "</span>"));
-        ul.appendChild(li);
+        var ans;
+        var exp;
+
+        if (!answer.answer.includes('[해석]') && !answer.answer.includes('[설명]')) {
+          var li = document.createElement("li");
+          li.textContent = tempArray[i].answer;
+          li.checkMe = tempArray[i].status;
+          li.addEventListener("click", checkAnswer);
+          li.insertAdjacentHTML("afterbegin", "<span>".concat(i + 1, "</span>"));
+          ul.appendChild(li);
+        }
+
+        if (answer.status) {
+          ans = answer.answer;
+          modalAns.innerHTML = "&nbsp;&nbsp;<span style=\"color: white\">".concat(ans, "</span>");
+        }
+
+        if (answer.answer.includes('설명')) {
+          modalExp.innerHTML = answer.answer;
+        }
+
+        (0, _modal.default)();
       });
 
       var _index = document.createElement('div');
@@ -384,7 +407,7 @@ var app = function () {
 }();
 
 document.addEventListener("DOMContentLoaded", app.init);
-},{"./modal":"js/modal.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./modal":"js/modal.js"}],"C:/Users/sst88/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -412,7 +435,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54985" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53020" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -588,5 +611,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["C:/Users/sst88/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map
